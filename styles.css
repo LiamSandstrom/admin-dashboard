@@ -9,6 +9,8 @@
   --head-background: #ffffff;
   --content-background: #e2e8f0;
   --card-text-color: rgb(81, 78, 78);
+  --box-shadow: rgba(178, 176, 176, 0.496);
+  --sidebar-hover: #38a9e6;
 }
 
 body {
@@ -76,9 +78,13 @@ p {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(33deg)
     brightness(102%) contrast(104%);
   height: 25px;
+}
+
+.sidebar img , .announcements-container h4, .trending-container h4, .trending-container img, label{
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+  cursor: pointer;
 }
 
 #icon-dashboard {
@@ -97,7 +103,7 @@ p {
 }
 
 .dashboard-item:hover {
-  background-color: #38a9e6;
+  background-color: var(--sidebar-hover);
 }
 
 .dashboard-item:nth-child(8) {
@@ -221,11 +227,21 @@ input:focus {
   gap: 20px;
   background-color: var(--head-background);
   border-radius: 10px;
+  will-change: scale;
+  transition: scale 0.2s;
+}
+
+.card:hover{
+    scale: 1.02;
+}
+
+.card img:hover, label:hover, .head-item .icon:hover{
+    filter: invert(59%) sepia(98%) saturate(3892%) hue-rotate(173deg) brightness(92%) contrast(81%);
 }
 
 .card,
 .flex-down {
-  box-shadow: 2px 2px 10px rgba(178, 176, 176, 0.496);
+  box-shadow: 2px 2px 10px var(--box-shadow);
 }
 
 .card p,
@@ -309,39 +325,47 @@ input:focus {
       "content";
   }
 
-  .content{
-
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 330px 430px;
-  grid-template-areas:
-    "content"
-    "trending"
-    "announcements";
+  .content {
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: 1fr 430px;
+    grid-template-areas:
+      "content content"
+      "trending announcements";
   }
 
-  .sidebar{
+  .sidebar {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
   }
-.dashboard-item:nth-child(8) {
-  margin-top: 0px;
-}
+  .dashboard-item:nth-child(8) {
+    margin-top: 0px;
+  }
 }
 
-@media screen and (max-width:700px) {
-    .welcome-container{
-        visibility:collapse;
-        order: 1;
-    }
-    
-    .head-bottom-container{
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+@media screen and (max-width: 700px) {
+  .welcome-container {
+    visibility: collapse;
+    order: 1;
+  }
 
-    .head{
-        gap: 25px;
-    }
+  .head-bottom-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .head {
+    gap: 25px;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 330px 330px;
+    grid-template-areas:
+      "content"
+      "trending"
+      "announcements"
+      ;
+  }
 }
